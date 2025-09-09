@@ -1,4 +1,4 @@
-mib:  CISCO-REMOTE-ACCESS-MONITOR-MIB:CISCO-FIREWALL-MIB
+mib:  CISCO-REMOTE-ACCESS-MONITOR-MIB:CISCO-FIREWALL-MIB:ALTIGA-GLOBAL-REG:ALTIGA-LBSSF-STATS-MIB:ALTIGA-MIB:ALTIGA-SSL-STATS-MIB
 modules:
     os:
         sysDescr_regex: '/Version (?<version>.*)/'
@@ -63,3 +63,40 @@ modules:
                     num_oid: '.1.3.6.1.4.1.9.9.147.1.2.2.2.1.5.40.7'
                     descr: 'Highest Connections'
                     index: high
+                -
+                    oid: ALTIGA-LBSSF-STATS-MIB::alStatsLBSSFGlobal
+                    value: ALTIGA-LBSSF-STATS-MIB::alLBSSFNumberOfPeers
+                    num_oid: '.1.3.6.1.4.1.3076.2.1.2.36.1.4.0'
+                    descr: 'VPN Load-Balancing Peers'
+                    state_name: alLBSSFNumberOfPeers
+
+        state:
+            data:
+                -
+                    oid: ALTIGA-LBSSF-STATS-MIB::alStatsLBSSFGlobal
+                    value: ALTIGA-LBSSF-STATS-MIB::alLBSSFRole
+                    descr: 'VPN Load-Balancing Role'
+                    num_oid: '.1.3.6.1.4.1.3076.2.1.2.36.1.1.0'
+                    group: LBSS
+                    state_name: alLBSSFRole
+                    states:
+                        - { value:  1, generic: 0, graph: 0, descr: 'master' }
+                        - { value:  2, generic: 3, graph: 0, descr: 'slave' }
+                -
+                    oid: ALTIGA-LBSSF-STATS-MIB::alStatsLBSSFGlobal
+                    value: ALTIGA-LBSSF-STATS-MIB::alLBSSFActive
+                    descr: 'VPN Load-Balancing Active'
+                    num_oid: '.1.3.6.1.4.1.3076.2.1.2.36.1.3.0'
+                    group: LBSS
+                    state_name: alLBSSFActive
+                    states:
+                        - { value:  0, generic: 3, graph: 0, descr: 'disabled' }
+                        - { value:  1, generic: 0, graph: 0, descr: 'active' }
+
+        load:
+            data:
+                -
+                    oid: ALTIGA-LBSSF-STATS-MIB::alStatsLBSSFGlobal
+                    value: ALTIGA-LBSSF-STATS-MIB::alLBSSFLoad
+                    descr: 'VPN Load-Balancing Load'
+                    state_name: alLBSSFLoad
